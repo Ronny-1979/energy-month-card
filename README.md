@@ -1,4 +1,4 @@
-# Energie-Monats-Karte-fuer-Trockner-und-Waschmaschine
+# Energie Karte für Trockner und Waschmaschine
 
 # Bad Energy Month Card
 
@@ -15,7 +15,7 @@ Eine Lovelace Custom Card für Home Assistant zur Anzeige von Waschmaschine, Tro
 7. Karte herunterladen
 
 ## Resource
-
+Nur bei Manueller Installation.
 Nach der Installation muss die Ressource in Home Assistant so eingebunden werden:
 
 /hacsfiles/bad-energy-month-card/bad-energy-month-card.js
