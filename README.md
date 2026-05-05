@@ -8,6 +8,6 @@ Eine Lovelace Custom Card für Home Assistant zur Anzeige von Waschmaschine, Tro
 2. Drei Punkte oben rechts
 3. Benutzerdefinierte Repositories
 4. Repository-URL einfügen
-5. Kategorie: Lovelace / Frontend auswählen
+5. Kategorie: Dashboard
 6. Hinzufügen
 7. Karte herunterladen
