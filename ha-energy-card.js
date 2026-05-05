@@ -75,10 +75,11 @@ class HaEnergyCard extends HTMLElement {
   // Vergleicht den Sensor-Wert mit dem konfigurierten "läuft"-Wert
   _isRunning(status, type) {
     const st  = String(status || "").toLowerCase();
-    const val = (type === "dryer"
+    const val = type === "dryer"
       ? this.config.dryer_running_value
-      : this.config.washer_running_value).toLowerCase();
-    return st === val;
+      : this.config.washer_running_value;
+    if (!val) return false;
+    return st === val.toLowerCase();
   }
 
   // Gibt die Icon-Farbe zurück: grün (Waschmaschine läuft), blau (Trockner läuft),
@@ -98,6 +99,26 @@ class HaEnergyCard extends HTMLElement {
   // Lädt alle Daten und baut das komplette Karten-HTML neu auf
   async render() {
     if (!this._hass || this.loading) return;
+
+    // Pflichtfelder prüfen – Hinweis anzeigen solange noch nichts konfiguriert ist
+    if (!this.config.price_entity || !this.config.washer_energy || !this.config.dryer_energy) {
+      this.shadowRoot.innerHTML = `
+        <div style="
+          padding: 24px 20px;
+          color: rgba(255,255,255,0.7);
+          font-family: var(--primary-font-family);
+          font-size: 15px;
+          text-align: center;
+          line-height: 1.6;
+        ">
+          ⚙️ <strong style="color:white;">HA Energy Card</strong><br>
+          Bitte die Karte über den Editor konfigurieren.<br>
+          <span style="font-size:13px; opacity:0.6;">Strompreis, Energie-Sensoren und Status-Sensoren eintragen.</span>
+        </div>
+      `;
+      return;
+    }
+
     this.loading = true;
 
     const cfg   = this.config;
